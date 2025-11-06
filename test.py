@@ -52,7 +52,6 @@ def guardar_paises(nombre_archivo, lista_paises):
             escritor.writerow([pais['nombre'], pais['poblacion'], pais['superficie'], pais['continente']])
     
 ## Validaciones pendientes
-# Controlar errores de formato en el CSV.
 # Evitar fallos al ingresar filtros inválidos o búsquedas sin resultados.
 # Mensajes claros de éxito/error.
 #
