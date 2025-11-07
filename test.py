@@ -50,7 +50,58 @@ def guardar_paises(nombre_archivo, lista_paises):
 
         for pais in lista_paises:
             escritor.writerow([pais['nombre'], pais['poblacion'], pais['superficie'], pais['continente']])
-    
+
+## Funciones de validación
+
+def validar_existencia_pais(lista_paises, nombre):
+    """
+    Valida si un país ya existe en la lista de países.
+
+    Retorna True si el país existe, False en caso contrario.
+    """
+    nombre_normalizado = nombre.strip().lower()
+    for pais in lista_paises:
+        if pais['nombre'].strip().lower() == nombre_normalizado:
+            return True
+    return False
+
+## Funciones del menú
+
+def agregar_pais(lista_paises):
+    """
+    Agrega un nuevo país a la lista de países.
+
+    Solicita al usuario el nombre, población, superficie y continente del país.
+    Valida que el país no exista ya en la lista.
+    """
+    nombre = input("Ingrese el nombre del país: ").strip()
+    poblacion = input("Ingrese la población del país: ").strip()
+    superficie = input("Ingrese la superficie del país (en km²): ").strip()
+    continente = input("Ingrese el continente del país: ").strip()
+
+    # Validar que el país no exista ya
+    if validar_existencia_pais(lista_paises, nombre):
+        print(f"El país '{nombre}' ya existe en la lista.")
+        return
+
+    # Validar que población y superficie sean números enteros positivos
+    if not poblacion.isdigit() or int(poblacion) < 0:
+        print("La población debe ser un número entero positivo.")
+        return
+    if not superficie.isdigit() or int(superficie) < 0:
+        print("La superficie debe ser un número entero positivo.")
+        return
+
+    nuevo_pais = {
+        "nombre": nombre,
+        "poblacion": int(poblacion),
+        "superficie": int(superficie),
+        "continente": continente
+    }
+    lista_paises.append(nuevo_pais)
+    guardar_paises(nombre_archivo, lista_paises)
+    print(f"País '{nombre}' agregado exitosamente.")
+
 ## Validaciones pendientes
 # Evitar fallos al ingresar filtros inválidos o búsquedas sin resultados.
 # Mensajes claros de éxito/error.
@@ -62,7 +113,7 @@ def imprimir_menu():
 
     """
     print("\n" + "=" * 34)
-    print("\n--- Gestión de Datos de Países ---")
+    print("--- Gestión de Datos de Países ---")
     print("=" * 34)
     print("1. Agregar un país")
     print("2. Actualizar datos de un país")
@@ -80,7 +131,7 @@ def main():
         opcion = input("Seleccione una opción (1-7): ")
         match opcion:
             case "1":
-                pass ## Agregar un país
+                agregar_pais(paises)
             case "2":
                 pass ## Actualizar datos de un país
             case "3":
@@ -96,3 +147,5 @@ def main():
                 break
             case _:
                 print("Opción no válida. Por favor, seleccione una opción del 1 al 7.")
+            
+main()
