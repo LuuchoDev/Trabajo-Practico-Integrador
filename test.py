@@ -99,37 +99,54 @@ def validar_cantidad(cantidad):
 def agregar_pais(lista_paises):
     """
     Agrega un nuevo país a la lista de países.
-
-    Solicita al usuario el nombre, población, superficie y continente del país.
-    Valida que el país no exista ya en la lista.
+    Valida los datos uno por uno.
     """
-    nombre = input("Ingrese el nombre del país: ").strip()
-    poblacion = input("Ingrese la población del país: ").strip()
-    superficie = input("Ingrese la superficie del país (en km²): ").strip()
-    continente = input("Ingrese el continente del país: ").strip()
+    print("\n--- 1. Agregar un País ---")
+    
+    # 1. Validar Nombre (no vacío y único)
+    nombre = ""
+    while True:
+        nombre = input("Ingrese el nombre del país: ").strip()
+        if not nombre:
+            print("Error: El nombre no puede estar vacío.")
+        elif validar_existencia_pais(lista_paises, nombre):
+            print(f"Error: El país '{nombre}' ya existe en la lista.")
+        else:
+            break 
 
-    # Validar que el país no exista ya
-    if validar_existencia_pais(lista_paises, nombre):
-        print(f"El país '{nombre}' ya existe en la lista.")
-        return
+    # 2. Validar Población (numérico positivo)
+    poblacion_str = ""
+    while True:
+        poblacion_str = input("Ingrese la población del país: ").strip()
+        if validar_cantidad(poblacion_str):
+            break 
 
-    # Validar que población y superficie sean números enteros positivos
-    if not poblacion.isdigit() or int(poblacion) < 0:
-        print("La población debe ser un número entero positivo.")
-        return
-    if not superficie.isdigit() or int(superficie) < 0:
-        print("La superficie debe ser un número entero positivo.")
-        return
+    # 3. Validar Superficie (numérico positivo)
+    superficie_str = ""
+    while True:
+        superficie_str = input("Ingrese la superficie del país (en km²): ").strip()
+        if validar_cantidad(superficie_str):
+            break 
 
+    # 4. Validar Continente (no vacío)
+    continente = ""
+    while True:
+        continente = input("Ingrese el continente del país: ").strip()
+        if not continente:
+            print("Error: El continente no puede estar vacío.")
+        else:
+            break # Dato válido
+
+    # Una vez todo validado, se agrega el país a la lista
     nuevo_pais = {
         "nombre": nombre,
-        "poblacion": int(poblacion),
-        "superficie": int(superficie),
+        "poblacion": int(poblacion_str),
+        "superficie": int(superficie_str),
         "continente": continente
     }
     lista_paises.append(nuevo_pais)
-    guardar_paises(nombre_archivo, lista_paises)
-    print(f"País '{nombre}' agregado exitosamente.")
+    guardar_paises(nombre_archivo, lista_paises) # Guardamos
+    print(f"\n¡País '{nombre}' agregado exitosamente!")
 
 def actualizar_datos_pais(lista_paises):
     """
