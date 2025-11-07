@@ -91,13 +91,6 @@ def validar_cantidad(cantidad):
         print("La cantidad debe ser un número entero positivo.")
         return False
     
-def validar_pais(pais):
-    ## Valida si el pais que ingresa el usuario no esta vacío.
-    if pais.strip():
-        return True
-    else:
-        print("El pais no puede estar vacío.")
-        return False
 
 # ==========================================
 #             Funciones de Menú
@@ -152,7 +145,22 @@ def actualizar_datos_pais(lista_paises):
     print(f"Actualizando datos para el país: {pais_encontrado['nombre']}")
     print(f"Datos actuales -> Población: {pais_encontrado['poblacion']} | Superficie: {pais_encontrado['superficie']}")
 
+    nueva_poblacion = input("Ingrese la nueva población: ").strip()
+    nueva_superficie = input("Ingrese la nueva superficie: ").strip()
 
+    # Validar que población y superficie sean números enteros positivos
+    if not nueva_poblacion.isdigit() or int(nueva_poblacion) < 0:
+        print("La población debe ser un número entero positivo.")
+        return
+    if not nueva_superficie.isdigit() or int(nueva_superficie) < 0:
+        print("La superficie debe ser un número entero positivo.")
+        return
+
+    pais_encontrado["poblacion"] = int(nueva_poblacion)
+    pais_encontrado["superficie"] = int(nueva_superficie)
+    guardar_paises(nombre_archivo, lista_paises)
+
+    print(f"Datos del país '{pais_encontrado['nombre']}' actualizados exitosamente.")
 
 
 def imprimir_menu():
