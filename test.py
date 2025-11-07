@@ -56,7 +56,7 @@ def guardar_paises(nombre_archivo, lista_paises):
             escritor.writerow([pais['nombre'], pais['poblacion'], pais['superficie'], pais['continente']])
 
 # ==========================================
-#               Funciones de Validación
+#             Funciones de Validación
 # ==========================================
 
 def validar_existencia_pais(lista_paises, nombre):
@@ -72,7 +72,7 @@ def validar_existencia_pais(lista_paises, nombre):
     return False
 
 # ==========================================
-#               Funciones de Menú
+#             Funciones de Menú
 # ==========================================
 
 def agregar_pais(lista_paises):
