@@ -102,10 +102,7 @@ def agregar_pais(lista_paises):
     guardar_paises(nombre_archivo, lista_paises)
     print(f"País '{nombre}' agregado exitosamente.")
 
-## Validaciones pendientes
-# Evitar fallos al ingresar filtros inválidos o búsquedas sin resultados.
-# Mensajes claros de éxito/error.
-#
+
 
 def imprimir_menu():
     """
