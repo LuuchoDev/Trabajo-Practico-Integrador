@@ -162,19 +162,22 @@ def actualizar_datos_pais(lista_paises):
     print(f"Actualizando datos para el país: {pais_encontrado['nombre']}")
     print(f"Datos actuales -> Población: {pais_encontrado['poblacion']} | Superficie: {pais_encontrado['superficie']}")
 
-    nueva_poblacion = input("Ingrese la nueva población: ").strip()
-    nueva_superficie = input("Ingrese la nueva superficie: ").strip()
+    nueva_poblacion_str = ""
+    while True:
+        nueva_poblacion_str = input("Ingrese la NUEVA población: ").strip()
+        # Usamos tu función de validación
+        if validar_cantidad(nueva_poblacion_str):
+            break # El dato es válido
 
-    # Validar que población y superficie sean números enteros positivos
-    if not nueva_poblacion.isdigit() or int(nueva_poblacion) < 0:
-        print("La población debe ser un número entero positivo.")
-        return
-    if not nueva_superficie.isdigit() or int(nueva_superficie) < 0:
-        print("La superficie debe ser un número entero positivo.")
-        return
+    # 2. Pedir y validar NUEVA Superficie
+    nueva_superficie_str = ""
+    while True:
+        nueva_superficie_str = input("Ingrese la NUEVA superficie (en km²): ").strip()
+        if validar_cantidad(nueva_superficie_str):
+            break
 
-    pais_encontrado["poblacion"] = int(nueva_poblacion)
-    pais_encontrado["superficie"] = int(nueva_superficie)
+    pais_encontrado["poblacion"] = int(nueva_poblacion_str)
+    pais_encontrado["superficie"] = int(nueva_superficie_str)
     guardar_paises(nombre_archivo, lista_paises)
 
     print(f"Datos del país '{pais_encontrado['nombre']}' actualizados exitosamente.")
