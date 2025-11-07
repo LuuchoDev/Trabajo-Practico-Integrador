@@ -3,7 +3,11 @@ import os
 
 nombre_archivo = "paises.csv"
 
-## Funciones para cargar y guardar datos de países
+# ================================================
+#  Funciones para cargar y guardar datos de países
+# ================================================
+
+
 def cargar_paises(nombre_archivo):
     """
     Cargar los datos de paises desde un archivo CSV.
@@ -51,7 +55,9 @@ def guardar_paises(nombre_archivo, lista_paises):
         for pais in lista_paises:
             escritor.writerow([pais['nombre'], pais['poblacion'], pais['superficie'], pais['continente']])
 
-## Funciones de validación
+# ==========================================
+#               Funciones de Validación
+# ==========================================
 
 def validar_existencia_pais(lista_paises, nombre):
     """
@@ -65,7 +71,9 @@ def validar_existencia_pais(lista_paises, nombre):
             return True
     return False
 
-## Funciones del menú
+# ==========================================
+#               Funciones de Menú
+# ==========================================
 
 def agregar_pais(lista_paises):
     """
