@@ -165,11 +165,11 @@ def actualizar_datos_pais(lista_paises):
     nueva_poblacion_str = ""
     while True:
         nueva_poblacion_str = input("Ingrese la NUEVA población: ").strip()
-        # Usamos tu función de validación
-        if validar_cantidad(nueva_poblacion_str):
-            break # El dato es válido
 
-    # 2. Pedir y validar NUEVA Superficie
+        if validar_cantidad(nueva_poblacion_str):
+            break 
+
+    # 2. Pedir y validar nueva superficie
     nueva_superficie_str = ""
     while True:
         nueva_superficie_str = input("Ingrese la NUEVA superficie (en km²): ").strip()
