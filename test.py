@@ -71,6 +71,34 @@ def validar_existencia_pais(lista_paises, nombre):
             return True
     return False
 
+def buscar_pais_por_nombre(lista_paises, nombre_buscado):
+    """
+    Busca un país en la lista por su nombre.
+
+    Retorna el diccionario del país si se encuentra, None en caso contrario.
+    """
+    nombre_normalizado = nombre_buscado.strip().lower()
+    for pais in lista_paises:
+        if pais['nombre'].strip().lower() == nombre_normalizado:
+            return pais
+    return None
+
+def validar_cantidad(cantidad):
+    ## Valida si la cantidad ingresada es un número entero positivo.
+    if cantidad.isdigit() and int(cantidad) >= 0:
+        return True
+    else:
+        print("La cantidad debe ser un número entero positivo.")
+        return False
+    
+def validar_pais(pais):
+    ## Valida si el pais que ingresa el usuario no esta vacío.
+    if pais.strip():
+        return True
+    else:
+        print("El pais no puede estar vacío.")
+        return False
+
 # ==========================================
 #             Funciones de Menú
 # ==========================================
@@ -110,6 +138,21 @@ def agregar_pais(lista_paises):
     guardar_paises(nombre_archivo, lista_paises)
     print(f"País '{nombre}' agregado exitosamente.")
 
+def actualizar_datos_pais(lista_paises):
+    """
+    Actualiza los datos de un país existente en la lista de países.
+
+    """
+    nombre_buscado = input("Ingrese el nombre del paìs a actualizar: ").strip()
+    pais_encontrado = buscar_pais_por_nombre(lista_paises, nombre_buscado)
+
+    if not pais_encontrado:
+        print(f"El país '{nombre_buscado}' no se encontró en la lista.")
+        return
+    print(f"Actualizando datos para el país: {pais_encontrado['nombre']}")
+    print(f"Datos actuales -> Población: {pais_encontrado['poblacion']} | Superficie: {pais_encontrado['superficie']}")
+
+
 
 
 def imprimir_menu():
@@ -138,7 +181,7 @@ def main():
             case "1":
                 agregar_pais(paises)
             case "2":
-                pass ## Actualizar datos de un país
+                actualizar_datos_pais(paises)
             case "3":
                 pass ## Buscar un país
             case "4":
