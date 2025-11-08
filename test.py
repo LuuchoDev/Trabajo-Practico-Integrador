@@ -173,6 +173,7 @@ def actualizar_datos_pais(lista_paises):
 
     """
     print("\n--- 2. Actualizar Datos de un País ---")
+    mostrar_lista_paises(lista_paises)
     nombre_buscado = input("Ingrese el nombre del paìs a actualizar: ").strip()
     pais_encontrado = buscar_pais_por_nombre(lista_paises, nombre_buscado)
 
@@ -230,7 +231,7 @@ def buscar_pais(lista_paises):
     
     ## Mosntrar resultados
     if coincidencias:
-        print(f"\nSe encontraron {len(coincidencias)}coincidencias parciales para '{pais_buscado}':")
+        print(f"\nSe encontraron {len(coincidencias)} coincidencias parciales para '{pais_buscado}':")
         mostrar_lista_paises(coincidencias)
     else:
         print(f"No se encontraron coincidencias para '{pais_buscado}'.")
@@ -265,7 +266,7 @@ def main():
             case "2":
                 actualizar_datos_pais(paises)
             case "3":
-                buscar_pais()
+                buscar_pais(paises)
             case "4":
                 pass ## Filtrar países
             case "5":
@@ -273,7 +274,7 @@ def main():
             case "6":
                 pass ## Mostrar estadísticas
             case "7":
-                print("¡Gracias por usar el programa :D!.")
+                print("¡Gracias por usar el programa :D!")
                 break
             case _:
                 print("Opción no válida. Por favor, seleccione una opción del 1 al 7.")
