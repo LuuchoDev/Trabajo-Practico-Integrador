@@ -110,6 +110,31 @@ def mostrar_lista_paises(lista_paises):
         print(f"{pais['nombre']:<20} | {pob_formateada:<15} | {sup_formateada:>15} | {pais['continente']:>15}")
     print("=" * 70)
 
+def obtener_rango_numerico(tipo_dato):
+    """
+    Pide al usuario un rango numérico (mínimo y máximo) y lo valida usando la funcion "validar_cantidad".
+    "tipo_dato" es un string (ej: poblacion) para mostrar en los mensajes.
+    Retorna (min_val, max_val) como enteros.
+    """
+    ## Pedir y validar el valor minimo
+    while True:
+        min_str = input(f"Ingrese la {tipo_dato} MÍNIMA: ").strip()
+        if validar_cantidad(min_str):
+            break
+    ## Pedir y validar el valor maximo
+    while True:
+        max_str = input(f"Ingrese la {tipo_dato} MAXIMA: ").strip()
+        if validar_cantidad(max_str):
+            break
+    min_val = int(min_str)
+    max_val = int(max_str)
+
+    ## verificar que el minimo no sea mayor que el máximo
+    if min_val > max_val:
+        print(f"Error: El valor mínimo ({min_val}) no puede ser mayor que el valor máximo ({max_val}). Intercambiando valores.")
+        min_val, max_val = max_val, min_val
+    return min_val, max_val
+
 
 # ==========================================
 #             Funciones de Menú
@@ -240,7 +265,33 @@ def filtrar_por_continente(lista_paises):
     """
     Filtra y muestra países por continente.
     """
+    print("\n--- 4.1 Filtrar por Continente ---")
+    continente_buscado = input("Ingrese el continente a filtrar: ").strip()
+    if not continente_buscado:
+        print("Error: El continente no puede estar vacío.")
+        return
+    resultados =[]
+    for pais in lista_paises:
+        if pais['continente'].strip().lower() == continente_buscado.strip().lower():
+            resultados.append(pais)
+    mostrar_lista_paises(resultados)
+
+def filtrar_por_rango(lista_paises, clave, unidad):
+    """
+    Funcion para filtrar rangos númericos.
+    "clave" es el nombre del campo en el diccionario (poblacion o superficie).
+    "unidad" es el texto que se muestra al usuario (población o superficie).
+    """
+    print(f"\n --- 4.2 Filtrar por Rango de {unidad.title()} ---")
+    (min_val, max_val) = obtener_rango_numerico(unidad)
     
+    resultados = []
+    for pais in lista_paises:
+        if min_val <= pais[clave] <= max_val:
+            resultados.append(pais)
+    mostrar_lista_paises(resultados)
+
+
 
 def filtrar_paises(lista_paises):
     """
