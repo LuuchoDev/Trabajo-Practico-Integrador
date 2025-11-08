@@ -203,12 +203,38 @@ def actualizar_datos_pais(lista_paises):
 
     print(f"Datos del país '{pais_encontrado['nombre']}' actualizados exitosamente.")
 
-def buscar_pais():
+def buscar_pais(lista_paises):
     """
     Permite buscar países por nombre, mostrando coincidencias
     exactas o parciales.
     """
     print("\n--- 3. Buscar un País ---")
+
+    pais_buscado = input("Ingrese el nombre del país a buscar: ").strip().lower()
+    if not pais_buscado:
+        print("Error: El nombre no puede estar vacío.")
+        return
+    ## Buscamos el pais mediante una busqueda exacta usando una función previa
+    pais_exacto = buscar_pais_por_nombre(lista_paises, pais_buscado)
+    if pais_exacto:
+        print(f"\nSe encontró 1 coincidencia exacta para '{pais_buscado}':")
+        mostrar_lista_paises([pais_exacto])
+        return
+    ## Si no hay coincidencia exacta, buscamos coincidencias parciales
+    print(f"\nNo se encontró una coincidencia exacta para '{pais_buscado}'. Buscando coincidencias parciales...")
+    coincidencias = []
+    pais_buscado_lower = pais_buscado.lower()
+    for pais in lista_paises:
+        if pais_buscado_lower in pais["nombre"].lower():
+            coincidencias.append(pais)
+    
+    ## Mosntrar resultados
+    if coincidencias:
+        print(f"\nSe encontraron {len(coincidencias)}coincidencias parciales para '{pais_buscado}':")
+        mostrar_lista_paises(coincidencias)
+    else:
+        print(f"No se encontraron coincidencias para '{pais_buscado}'.")
+
 
 
 def imprimir_menu():
