@@ -135,6 +135,27 @@ def obtener_rango_numerico(tipo_dato):
         min_val, max_val = max_val, min_val
     return min_val, max_val
 
+def obtener_nombre(pais):
+    """
+    Función auxiliar para obtener el nombre de un país.
+    Usada para ordenar por nombre.
+    """
+    return pais['nombre'].lower()
+
+def obtener_poblacion(pais):
+    """
+    Función auxiliar para obtener la población de un país.
+    Usada para ordenar por población.
+    """
+    return pais['poblacion']
+
+def obtener_superficie(pais):
+    """
+    Función auxiliar para obtener la superficie de un país.
+    Usada para ordenar por superficie.
+    """
+    return pais['superficie']
+
 
 # ==========================================
 #             Funciones de Menú
@@ -296,8 +317,7 @@ def filtrar_por_rango(lista_paises, clave, unidad):
 def filtrar_paises(lista_paises):
     """
     Muestra un sub-menú para elegir el tipo de filtro.
-    """
-    print("\n--- 4. Filtrar Países ---")
+    """  
     while True:
         print("\n--- 4. Filtrar Países ---")
         print("1. Filtrar por Continente")
@@ -316,12 +336,74 @@ def filtrar_paises(lista_paises):
             case "3":
                 filtrar_por_rango(lista_paises, "superficie", "superficie")
             case "4":
-                # Volver al menú principal
                 print("Volviendo al menú principal...")
                 break
             case _:
                 print("Opción no válida. Por favor, intente de nuevo.")
-    
+
+def ordenar_paises(lista_paises):
+    """
+    Muestra un sub-menú para elegir el criterio de ordenamiento.
+    (nombre, población, superficie) y la direccion (ascendente o descendente).
+    """
+    ## crear una copia de la lista original para no modificarla
+    lista_para_ordenar = lista_paises.copy()
+    while True:
+        print("\n--- 5. Ordenar Países ---")
+        print("1. Por Nombre (A-Z)")
+        print("2. Por Nombre (Z-A)")
+        print("3. Por Población (Mayor a Menor)")
+        print("4. Por Población (Menor a Mayor)")
+        print("5. Por Superficie (Mayor a Menor)")
+        print("6. Por Superficie (Menor a Mayor)")
+        print("7. Volver al Menú Principal")
+        print("-" * 34)
+        sub_opcion = input("Seleccione una opción de ordenamiento (1-7): ")
+        lista_ordenada = []
+
+        match sub_opcion:
+            case "1":
+                # Ordenar por Nombre (A-Z)
+                print("\nOrdenando por Nombre (A-Z)...")
+                # Pasamos el *nombre* de la función
+                lista_ordenada = sorted(lista_para_ordenar, key=obtener_nombre, reverse=False)
+                mostrar_lista_paises(lista_ordenada)
+
+            case "2":
+                # Ordenar por Nombre (Z-A)
+                print("\nOrdenando por Nombre (Z-A)...")
+                lista_ordenada = sorted(lista_para_ordenar, key=obtener_nombre, reverse=True)
+                mostrar_lista_paises(lista_ordenada)
+                
+            case "3":
+                # Ordenar por Población (Mayor a Menor)
+                print("\nOrdenando por Población (Mayor a Menor)...")
+                lista_ordenada = sorted(lista_para_ordenar, key=obtener_poblacion, reverse=True)
+                mostrar_lista_paises(lista_ordenada)
+
+            case "4":
+                # Ordenar por Población (Menor a Mayor)
+                print("\nOrdenando por Población (Menor a Mayor)...")
+                lista_ordenada = sorted(lista_para_ordenar, key=obtener_poblacion, reverse=False)
+                mostrar_lista_paises(lista_ordenada)
+
+            case "5":
+                # Ordenar por Superficie (Mayor a Menor)
+                print("\nOrdenando por Superficie (Mayor a Menor)...")
+                lista_ordenada = sorted(lista_para_ordenar, key=obtener_superficie, reverse=True)
+                mostrar_lista_paises(lista_ordenada)
+
+            case "6":
+                # Ordenar por Superficie (Menor a Mayor)
+                print("\nOrdenando por Superficie (Menor a Mayor)...")
+                lista_ordenada = sorted(lista_para_ordenar, key=obtener_superficie, reverse=False)
+                mostrar_lista_paises(lista_ordenada)
+
+            case "7":
+                print("Volviendo al menú principal...")
+                break
+            case _:
+                print("Opción no válida. Por favor, intente de nuevo.")
 
 
 def imprimir_menu():
@@ -354,9 +436,9 @@ def main():
             case "3":
                 buscar_pais(paises)
             case "4":
-                filtrar_paises(paises) ## Falta implementar
+                filtrar_paises(paises)
             case "5":
-                pass ## Ordenar países
+                ordenar_paises(paises) ## Falta implementar
             case "6":
                 pass ## Mostrar estadísticas
             case "7":
