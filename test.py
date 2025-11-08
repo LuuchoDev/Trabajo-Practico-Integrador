@@ -110,7 +110,7 @@ def mostrar_lista_paises(lista_paises):
         print(f"{pais['nombre']:<20} | {pob_formateada:<15} | {sup_formateada:>15} | {pais['continente']:>15}")
     print("=" * 70)
 
-    
+
 # ==========================================
 #             Funciones de Menú
 # ==========================================
@@ -172,6 +172,7 @@ def actualizar_datos_pais(lista_paises):
     Actualiza los datos de un país existente en la lista de países.
 
     """
+    print("\n--- 2. Actualizar Datos de un País ---")
     nombre_buscado = input("Ingrese el nombre del paìs a actualizar: ").strip()
     pais_encontrado = buscar_pais_por_nombre(lista_paises, nombre_buscado)
 
@@ -201,6 +202,13 @@ def actualizar_datos_pais(lista_paises):
     guardar_paises(nombre_archivo, lista_paises)
 
     print(f"Datos del país '{pais_encontrado['nombre']}' actualizados exitosamente.")
+
+def buscar_pais():
+    """
+    Permite buscar países por nombre, mostrando coincidencias
+    exactas o parciales.
+    """
+    print("\n--- 3. Buscar un País ---")
 
 
 def imprimir_menu():
