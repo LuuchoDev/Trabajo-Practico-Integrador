@@ -90,8 +90,27 @@ def validar_cantidad(cantidad):
     else:
         print("La cantidad debe ser un número entero positivo.")
         return False
-    
 
+def mostrar_lista_paises(lista_paises):
+    """
+    Muestra una lista de países (diccionarios) en un formato de tabla legible en consola.
+    """
+    if not lista_paises:
+        print("No hay países para mostrar.")
+        return
+    print("\n" + "=" * 70)
+    print(f"{'Nombre':<20} | {'Población':<15} | {'Superficie (km²)':>15} | {'Continente':>15}")
+    print("=" * 70)
+
+    ## Datos de cada país
+    for pais in lista_paises:
+        ## se formatean los números con separadores de miles
+        pob_formateada = f"{pais['poblacion']:,}"
+        sup_formateada = f"{pais['superficie']:,}"
+        print(f"{pais['nombre']:<20} | {pob_formateada:<15} | {sup_formateada:>15} | {pais['continente']:>15}")
+    print("=" * 70)
+
+    
 # ==========================================
 #             Funciones de Menú
 # ==========================================
@@ -212,7 +231,7 @@ def main():
             case "2":
                 actualizar_datos_pais(paises)
             case "3":
-                pass ## Buscar un país
+                buscar_pais()
             case "4":
                 pass ## Filtrar países
             case "5":
