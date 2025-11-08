@@ -236,13 +236,41 @@ def buscar_pais(lista_paises):
     else:
         print(f"No se encontraron coincidencias para '{pais_buscado}'.")
 
+def filtrar_por_continente(lista_paises):
+    """
+    Filtra y muestra países por continente.
+    """
+    
+
 def filtrar_paises(lista_paises):
     """
-    Filtra países según criterios especificados por el usuario.
-
+    Muestra un sub-menú para elegir el tipo de filtro.
     """
     print("\n--- 4. Filtrar Países ---")
-    print("Funcionalidad en desarrollo...")
+    while True:
+        print("\n--- 4. Filtrar Países ---")
+        print("1. Filtrar por Continente")
+        print("2. Filtrar por Rango de Población")
+        print("3. Filtrar por Rango de Superficie")
+        print("4. Volver al Menú Principal")
+        print("-" * 34)
+        
+        sub_opcion = input("Seleccione una opción de filtro (1-4): ")
+        
+        match sub_opcion:
+            case "1":
+                filtrar_por_continente(lista_paises)
+            case "2":
+                filtrar_por_rango(lista_paises, "poblacion", "población")
+            case "3":
+                filtrar_por_rango(lista_paises, "superficie", "superficie")
+            case "4":
+                # Volver al menú principal
+                print("Volviendo al menú principal...")
+                break
+            case _:
+                print("Opción no válida. Por favor, intente de nuevo.")
+    
 
 
 def imprimir_menu():
