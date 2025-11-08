@@ -236,6 +236,13 @@ def buscar_pais(lista_paises):
     else:
         print(f"No se encontraron coincidencias para '{pais_buscado}'.")
 
+def filtrar_paises(lista_paises):
+    """
+    Filtra países según criterios especificados por el usuario.
+
+    """
+    print("\n--- 4. Filtrar Países ---")
+    print("Funcionalidad en desarrollo...")
 
 
 def imprimir_menu():
@@ -268,7 +275,7 @@ def main():
             case "3":
                 buscar_pais(paises)
             case "4":
-                pass ## Filtrar países
+                filtrar_paises(paises) ## Falta implementar
             case "5":
                 pass ## Ordenar países
             case "6":
