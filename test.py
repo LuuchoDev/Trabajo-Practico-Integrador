@@ -162,6 +162,7 @@ def actualizar_datos_pais(lista_paises):
     print(f"Actualizando datos para el país: {pais_encontrado['nombre']}")
     print(f"Datos actuales -> Población: {pais_encontrado['poblacion']} | Superficie: {pais_encontrado['superficie']}")
 
+    # Pedir y validar nueva población
     nueva_poblacion_str = ""
     while True:
         nueva_poblacion_str = input("Ingrese la NUEVA población: ").strip()
@@ -169,7 +170,7 @@ def actualizar_datos_pais(lista_paises):
         if validar_cantidad(nueva_poblacion_str):
             break 
 
-    # 2. Pedir y validar nueva superficie
+    # Pedir y validar nueva superficie
     nueva_superficie_str = ""
     while True:
         nueva_superficie_str = input("Ingrese la NUEVA superficie (en km²): ").strip()
