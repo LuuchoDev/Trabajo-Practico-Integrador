@@ -405,6 +405,85 @@ def ordenar_paises(lista_paises):
             case _:
                 print("Opción no válida. Por favor, intente de nuevo.")
 
+def mostrar_estadisticas(lista_paises):
+    """
+    Calcula y muestra estadísticas clave sobre la lista de países.
+    Los calculos que se realizan son:
+    - País con mayor población y menor población.
+    - Promedio de población.
+    - Promedio de superficie.
+    - Cantidad de paises por continente.
+    """
+    print("\n--- 6. Estadísticas de Países ---")
+    if not lista_paises:
+        print("No hay países cargados para mostrar estadísticas.")
+        return
+    
+    ## Iniciamos las variables para los cálculos
+    
+    ## Para los mayores y menores, asignamos el primer país como referencia inicial y luego comparamos con los demás
+    pais_mayor_pob = lista_paises[0]
+    pais_menor_pob = lista_paises[0]
+
+    ## Sumas para promedios
+    total_poblacion = 0
+    total_superficie = 0
+
+    ## conteo de países por continente
+    conteo_continentes = {}
+
+    for pais in lista_paises:
+        if pais['poblacion'] > pais_mayor_pob['poblacion']:
+            pais_mayor_pob = pais
+        elif pais['poblacion'] < pais_menor_pob['poblacion']:
+            pais_menor_pob = pais
+    
+    ## Calcular sumas para el promedio
+        total_poblacion = total_poblacion + pais['poblacion']
+        total_superficie = total_superficie + pais['superficie']
+
+    ## conteo de países por continente
+        continente = pais['continente']
+        if continente in conteo_continentes:
+            conteo_continentes[continente] += 1
+        else:
+            conteo_continentes[continente] = 1
+    
+    ## promedio
+    cantidad_paises = len(lista_paises)
+    promedio_poblacion = total_poblacion / cantidad_paises
+    promedio_superficie = total_superficie / cantidad_paises
+
+    ## Mostrar resultados
+
+    print("\n" + "=" * 40)
+    print("  ESTADÍSTICAS GENERALES ")
+    print("=" * 40)
+    
+    print(f"Total de países en la lista: {cantidad_paises}")
+    
+    print("\n--- Población ---")
+    print(f"País con MAYOR población:")
+    print(f"  -> {pais_mayor_pob['nombre']} ({pais_mayor_pob['poblacion']:,} hab.)")
+    
+    print(f"País con MENOR población:")
+    print(f"  -> {pais_menor_pob['nombre']} ({pais_menor_pob['poblacion']:,} hab.)")
+    
+    print(f"Promedio de población global:")
+    print(f"  -> {promedio_poblacion:,.0f} hab.")
+    
+    print("\n--- Superficie ---")
+    print(f"Promedio de superficie global:")
+    print(f"  -> {promedio_superficie:,.2f} km²")
+    
+    print("\n--- Países por Continente ---")
+    for continente in conteo_continentes:
+        cantidad = conteo_continentes[continente]
+        print(f"  -> {continente}: {cantidad} país(es)")
+        
+    print("=" * 40)
+
+    
 
 def imprimir_menu():
     """
@@ -438,9 +517,9 @@ def main():
             case "4":
                 filtrar_paises(paises)
             case "5":
-                ordenar_paises(paises) ## Falta implementar
+                ordenar_paises(paises) 
             case "6":
-                pass ## Mostrar estadísticas
+                mostrar_estadisticas(paises)
             case "7":
                 print("¡Gracias por usar el programa :D!")
                 break
