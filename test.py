@@ -435,7 +435,7 @@ def mostrar_estadisticas(lista_paises):
     for pais in lista_paises:
         if pais['poblacion'] > pais_mayor_pob['poblacion']:
             pais_mayor_pob = pais
-        elif pais['poblacion'] < pais_menor_pob['poblacion']:
+        if pais['poblacion'] < pais_menor_pob['poblacion']:
             pais_menor_pob = pais
     
     ## Calcular sumas para el promedio
