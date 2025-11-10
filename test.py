@@ -457,7 +457,7 @@ def mostrar_estadisticas(lista_paises):
     ## Mostrar resultados
 
     print("\n" + "=" * 40)
-    print("  ESTADÍSTICAS GENERALES ")
+    print("       ESTADÍSTICAS GENERALES ")
     print("=" * 40)
     
     print(f"Total de países en la lista: {cantidad_paises}")
